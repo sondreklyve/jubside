@@ -1,0 +1,63 @@
+{% load static %}
+{% url 'frontpage' as jubside_frontpage %}
+{% url 'user.profile' as user_profile %}
+{% url 'user.settings' as user_settings %}
+{% url 'user.change_password' as user_change_password %}
+{% url 'user.events' as user_events %}
+{% url 'user.registration' as user_registration %}
+{% url 'user.reset' as user_reset %}
+{% url 'user.registerapplicants' as user_registerapplicants %}
+{% url 'user.logout' as user_logout %}
+{% url 'user.login' as user_login %}
+<nav id="jub-nav">
+	<div id="site-navigation" aria-label="Menu">
+	    <a href="{{ jubside_frontpage }}" class="col3">
+		    <img src="{% static "img/Logo-icon-jub75.png" %}" alt="75">
+	    </a>
+
+        <label for="toggle-mobile-menu" aria-label="Menu">&#9776;</label>
+		<input id="toggle-mobile-menu" type="checkbox">
+
+		<ul id="main-menu">
+			<li style="text-align: center" {% if request.path == jubside_frontpage %}class="active"{% endif %}><a href="{{ jubside_frontpage }}" class="col3">Hjem</a></li>
+			<li style="text-align: center"><a href="{{ '/album/' }}" class="col5">Album</a></li>
+			<li style="text-align: center"><a href="{{ '/alumni/' }}" class="col4">Alumni</a></li>
+<!--
+            <li style="text-align: center"><a href="#news" data-toggle="popover" title="Popover Header" data-content="Under utvikling" class="col1">Nyheter</a></li>
+			<li style="text-align: center"><a href="#alumni" class="col4">Alumni</a></li>
+-->
+		</ul>
+		<ul id="user-block">
+			{% if user.is_authenticated %}
+			  <li class="dropdown{% if request.path == user_registerapplicants or request.path == user_profile or request.path == user_settings or request.path == user_change_password or request.path == user_events %} active{% else %}{% endif %}">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.first_name }} <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+				  <li><a href="{{ user_profile }}">Min profil</a></li>
+				  <li><a href="{{ user_settings }}">Innstillinger</a></li>
+				  <li><a href="{{ user_events }}">Påmeldte arrangementer</a></li>
+				  {% if perms.user.can_view_users %}
+					<li><a href="{{ user_registerapplicants }}">Brukere</a></li>
+				  {% endif %}
+				  <li role="separator" class="divider"></li>
+				  <li><a href="{{ user_logout }}">Logg ut</a></li>
+				</ul>
+			  </li>
+			{% else %}
+			<li {% if request.path == user_login or request.path == user_registration or request.path == user_reset %}class="active"{% endif %}><a href="{{ user_login }}" class="col5">Logg inn / Registrer deg</a></li>
+			{% endif %}
+		</ul>
+	</div>
+</nav>
+<!--
+<nav id="jub-newsflash">
+	<ul>
+		<li>KOMPONENTER VILLE ETTER BILLETTER (28. februar)</li>
+		<li>UTSOLGT UTSOLGT UTSOLGT (13. februar)</li>
+		<li>BANKETTSLIPP (23. januar)</li>
+		<li>BARE TO MÅNEDER IGJEN  (3. januar)</li>
+	</ul>
+	<span id="jub-newsmore">
+		Flere nyheter
+	</span>
+</nav>
+-->

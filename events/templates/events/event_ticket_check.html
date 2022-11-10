@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Check-in for arrangement: {{ event_name }}</h1>
+<div>
+  Totalt antall sjekket inn: {{ total_checked_in }} av {{ total_registrations }}
+</div>
+
+<form action="" method="post" class="form">{% csrf_token %}
+    <div class="form-inline">
+        <input id="ticket" class="form-control" type="text" name="text" size="40" maxlength="100" />
+    </div>
+</form>
+{% if is_ticket == True %}
+    {% if copy == "True" %}
+    <div class="btn-block bg-danger">
+        <h3>Denne billetten er allerede brukt! Innsjekk skjedde: {{ check_in_time }}</h3>
+    </div>
+    {% endif %}
+
+
+    <div class="table-bordered h4">
+        <div {% if copy == "False" %}class="bg-success" {% endif %}>Navn: {{ first_name }} {{ last_name }}</div><br>
+        Email: {{ email }}<br><br>
+        Allergier/matbehov: {{ allergies }}<br>
+    </div>
+    <div class="table-bordered">
+        Startår: {{ starting_year }}<br>
+        Har betalt: {{ has_paid }}<br>
+        Sjekket inn: {{ checked_in }}<br>
+        Tallplass: {{ number }}<br>
+    </div>
+{% else %}
+
+    <div class="alert alert-danger">
+        <h1>Dette er ikke en gyldig billett!</h1>
+    </div>
+
+{% endif %}
+
+    <script>
+        $("#ticket").focus();
+    </script>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% load qr_code %}
+
+Hei {{ name }},
+den vedlagte QR-koden er billetten din til "{{ event.headline }}".
+Ha billetten klar ved inngang til arrangementet.
+
+Sted: {{ event.location }}
+Start: {{ event.event_start|date:"j\. F\, Y\, \k\l\. H\:i" }}
+Slutt: {{ event.event_end|date:"j\. F\, Y\, \k\l\. H\:i" }}
+Ta kontakt med {% if event.organizer %}{{ event.organizer }}{% else %}arrangement-ansvarlig{% endif %}
+eller send mail til "jubileum@nabla.ntnu.no"
+dersom du har spørsmål.
+
+Ticket-id: {{ ticket_id }}

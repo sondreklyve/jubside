@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="vertical-center">
+    <div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+            {% if user.is_authenticated %}
+            {% if not user.starting_year %}
+            <div class="alert alert-warning">
+                <strong>OBS!</strong> Profilen din mangler "årskull". Legg til dette under "innstillinger" for å kunne melde deg på arrangement.
+            </div>
+            {% endif %}
+            {% endif %}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4 class="text-center">Velkommen {{ user.first_name }}!</h4>
+                    <br>
+                    <a class="btn btn-primary btn-block" href="{% url 'user.settings' %}"><span class="glyphicon glyphicon-cog"></span> Innstillinger</a>
+                    <a class="btn btn-primary btn-block" href="{% url 'user.events' %}"><span class="glyphicon glyphicon-calendar"></span> Påmeldte arrangementer</a>
+                    {% if perms.user.can_view_users %}
+                        <a class="btn btn-success btn-block" href="{% url 'user.registerapplicants' %}"><span class="glyphicon glyphicon-user"></span> Brukere</a>
+                    {% endif %}
+                    {% if perms.user.admin %}
+                        <a class="btn btn-success btn-block" href="{% url 'admin:index' %}"><span class="glyphicon glyphicon-cog"></span> Admin</a>
+                    {% endif %}
+                    <a class="btn btn-danger btn-block" href="{% url 'user.logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logg ut</a>
+                </div>
+            </div>
+            <ol class="breadcrumb">
+                <li class="active">Min profil</li>
+            </ol>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock %}

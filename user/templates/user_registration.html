@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="vertical-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Registrer deg</div>
+                    <div class="panel-body">
+                        {% if form.errors %}
+                            <div role="alert" class="alert-dismissible alert alert-danger">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                {{ form.errors }}
+                            </div>
+                        {% endif %}
+                        {% if done %}
+                            <h3 class="text-center">Gratulerer, du er nå registrert og avventer sjekk.</h3>
+                        {% else %}
+                            <h4>Informasjon:</h4>
+                            <p>
+                                Om du ikke har eksisterende bruker på nabla.no blir du bedt om å sende inn en registreringsforespørsel.
+                                Dette gjør vi for å bekrefte din tilknytning til linjeforeningen Nabla.
+                                Du mottar en verifiserings e-post når og om forespørselen din har blitt godkjent.
+                            </p>
+                            <br>
+                            <form method="POST" class="post-form" action="{% url 'user.registration' %}">
+                                {% csrf_token %}
+                                <label>Fornavn</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon "><span class="glyphicon glyphicon-user"></span></span>
+                                    {{ form.first_name }}
+                                </div>
+                                <br>
+                                <label>Etternavn</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon "><span class="glyphicon glyphicon-user"></span></span>
+                                    {{ form.last_name }}
+                                </div>
+                                <br>
+                                <label>E-post</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon "><span class="glyphicon glyphicon-envelope"></span></span>
+                                    {{ form.email }}
+                                </div>
+                                <br>
+                                <label>Passord</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon "><span class="glyphicon glyphicon-lock"></span></span>
+                                    {{ form.password }}
+                                </div>
+                                <br>
+                                <label>Årskull (4 siffer)</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon "><span class="glyphicon glyphicon-education"></span></span>
+                                    {{ form.starting_year }}
+                                </div>
+                                <br>
+                                <label>Allergier (+div, f.eks. vegetar)</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon "><span class="glyphicon glyphicon-apple"></span></span>
+                                    {{ form.allergies }}
+                                </div>
+                                <br>
+                                <label>Hva er roten av to multiplisert med roten av to?</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon "><span class="glyphicon glyphicon-star"></span></span>
+                                    {{ form.spam_bot_check }}
+                                </div>
+                                <br><br>
+                                <button type="submit" class="save btn btn-primary btn-block" >Send forespørsel</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'user.login' %}">Logg inn</a></li>
+                    <li class="active">Registrer deg</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

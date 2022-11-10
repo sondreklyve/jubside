@@ -1,0 +1,13 @@
+{% extends "content/includes/sidebar-admin.html" %}
+
+{% block sidebar-admin %}
+
+{% if event.registration_required %}
+    <li><a href="{% url "event_admin" event.id %}"><span class="glyphicon glyphicon-user"></span>Administrer påmeldinger</a></li>
+    <li><a href="{% url "event_registrations" event.id %}"><span class="glyphicon glyphicon-list"></span> Påmeldingsliste</a></li>
+    <li><a href="{% url "check_in" event.id %}"><span class="glyphicon glyphicon-check"></span> Sjekk-inn</a></li>
+    {% if ended %}
+    <li><a href="{% url "event_summary" event.id event.slug %}"><span class="glyphicon glyphicon-stats"></span> Oversikt over hvem som ikke kom</a></li>
+    {% endif %}
+{% endif %}
+{% endblock %}

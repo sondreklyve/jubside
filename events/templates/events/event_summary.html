@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}{{ event.headline }}{% endblock %}
+
+{% block content %}
+
+<h2>{{ event.headline }} startet {{ event.event_start }}</h2>
+
+{% if did_not_attend %}
+<h3>Personer som ikke skjekket inn - {{ did_not_attend.count }} stk.</h3>
+<ul>
+  {% for registration in did_not_attend %}
+  <li>{{ registration.user.get_full_name }} - {{ registration.user.email }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% if checked_in_late %}
+<h3>Personer som skjekket inn mer enn 10 min for seint - {{ checked_in_late.count }} stk.</h3>
+<ul>
+  {% for registration in checked_in_late %}
+  <li>{{ registration.user.get_full_name }} - {{ registration.user.email }} | skjekket inn {{ registration.check_in_time|timeuntil:registration.event.event_start }} for seint</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% if not did_not_attend and not checked_in_late %}
+Det var ingen som ikke skjekket inn!!
+{% endif %}
+
+{% endblock %}

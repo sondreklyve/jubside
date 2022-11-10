@@ -1,0 +1,13 @@
+html{position: relative;min-height:100%;}
+body{padding-top:70px;margin-bottom:60px;}
+.footer{position:absolute;bottom:0;width:100%;height:60px;line-height:60px;}
+.footer-default{background-color:#2c3e50;}
+.footer-inverse{background-color:#149c82;}
+.vertical-center{min-height:75%;min-height:75vh;display:flex;align-items:center;}
+.table > tbody > tr > td {vertical-align:middle;}
+.btn.nohover:hover {
+    cursor:default !important;
+    color: #ffffff;
+    background-color: #18bc9c;
+    border-color: #18bc9c;
+}

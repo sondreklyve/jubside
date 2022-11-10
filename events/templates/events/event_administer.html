@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#selectall').click(function(event) {  //on click
+        if(this.checked) { // check select status
+            $('.checkbox1').each(function() { //loop through each checkbox
+                this.checked = true;  //select all checkboxes with class "checkbox1"
+            });
+        }else{
+            $('.checkbox1').each(function() { //loop through each checkbox
+                this.checked = false; //deselect all checkboxes with class "checkbox1"
+            });
+        }
+    });
+
+});
+</script>
+{% endblock %}
+
+{% block title %}{{ event.headline }}{% endblock %}
+
+{% block content %}
+<h2>{{ event.headline }}</h2>
+
+{% if event.registration_required %}
+<p>
+    Plasser: {{ event.places }}<br />
+    Påmeldte: {{ event.users_attending }}<br />
+    {% if event.has_queue %}
+        Ventende: {{ event.users_waiting }}<br />
+    {% endif %}
+    Epostliste:
+    <textarea>{% for email in event.users_attending_emails %}{{ email }}; {% endfor %}</textarea>
+</p>
+
+
+<form action="" method="post" class="form">{% csrf_token %}
+    <div class="form-inline">
+        Fritekst: <input class="form-control" type="text" name="text" size="40"/>
+        <br>
+        <div class="bg-warning">OBS! Vær sikker på at du velger riktig handling. Det er ikke sikkert at det du gjør er reversibelt.</div>
+        <select name="action" class="form-control">
+            {% for int_name, ext_name in actions %}
+                <option value="{{ int_name }}">{{ ext_name }}</option>
+            {% endfor %}
+        </select>
+        <div id="confirm-inital" class="btn form-control">Utfør</div>
+        <input id="confirm-final" class="form-control" type="submit" name="commit_changes" value="Er du sikker?">
+        <script>
+            $("#confirm-final").hide();
+            $("#confirm-inital").on("click", function(event) {
+                event.preventDefault();
+                $("#confirm-final").slideDown();
+            });
+        </script>
+    </div>
+
+    <br>
+    <strong>Merk alle påmeldte</strong>  <input type="checkbox" id="selectall"/>
+    <br>
+
+    {% if event.eventregistration_set %}
+        <table class="table table-striped">
+            <thead>
+                <tr class="bg-primary">
+                    <th>Plass</th>
+                    <th>Navn</th>
+                    <th>Email</th>
+                    <th>Har betalt</th>
+                    <th>Mottatt billett</th>
+                    <th>Sjekket inn</th>
+                    <th>Velg</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% with regs=event.attending_registrations %}
+                {% for reg in regs %}
+                    <tr class="bg-white">
+                        <td>{{ reg.number }}</td>
+                        <td>{{ reg.user.get_full_name }}</td>
+                        <td>{{ reg.user.email }}</td>
+                        <td>{{ reg.has_paid|yesno:"X, " }}</td>
+                        <td>{{ reg.has_received_ticket|yesno:"X, " }}</td>
+                        <td>{{ reg.checked_in|yesno:"X, " }}</td>
+                        <td><input class="checkbox1" type="checkbox" name="user" value="{{ reg.user.username }}" /></td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+
+                {% with regs=event.waiting_registrations %}
+                {% for reg in regs %}
+                    <tr class="bg-warning">
+                        <td>{{ reg.number }}</td>
+                        <td>{{ reg.user.get_full_name }}</td>
+                        <td>{{ reg.user.email }}</td>
+                        <td>{{ reg.has_paid|yesno:"X, " }}</td>
+                        <td>{{ reg.has_received_ticket|yesno:"X, " }}</td>
+                        <td>{{ reg.checked_in|yesno:"X, " }}</td>
+                        <td><input type="checkbox" name="user" value="{{ reg.user.username }}" /></td>
+                    </tr>
+                {% endfor %}
+                {% endwith %}
+            </tbody>
+        </table>
+    {% else %}
+        Det er ingen påmeldte brukere.
+    {% endif %}
+</form>
+
+{% else %}
+    <p>Registrering er ikke nødvendig, så det er ikke så mye å gjøre her.</p>
+{% endif %}
+
+{% endblock %}

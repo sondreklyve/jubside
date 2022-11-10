@@ -1,0 +1,17 @@
+#fireworks {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+}
+nav#jub-nav {
+    z-index: 1030;
+}
+#jub-news a {
+    z-index: 800;
+}
+footer.box {
+    z-index: 1030;
+}

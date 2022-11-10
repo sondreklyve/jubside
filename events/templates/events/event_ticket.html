@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load qr_code %}
+
+{% block content %}
+
+{% if permission or user_number == number %}
+    <div class="bg-white">
+    {% qr_from_text ticket_id size="m" %}
+        <div class="table-bordered">
+            Billet-ID: {{ ticket_id }}<br>
+            Navn: {{ first_name }} {{ last_name }}<br>
+            Email: {{ email }}<br>
+            Startår: {{ starting_year }}<br>
+            Allergier/matbehov: {{ allergies }}<br>
+            Har betalt: {{ has_paid }}<br>
+            Sjekket inn: {{ checked_in }}<br>
+        </div>
+    </div>
+{% else %}
+    Du har kun tilgang til din egen billett hvis du ikke er arrangement-administrator.
+{% endif %}
+{% endblock %}

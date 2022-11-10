@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>403 Forbidden</h1>
+{% if exception %}
+<p>{{ exception }}</p>
+{% else %}
+<p>Du har ikke tilgang til å se denne siden.</p>
+{% endif %}
+Tror du dette er en feil? Send en mail til webkom æt nabla dått ntnu dått no.
+{% endblock %}

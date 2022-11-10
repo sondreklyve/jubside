@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Registreringsforespørsler</div>
+            <div class="panel-body">
+                {% if message %}
+                    <div role="alert" class="alert-dismissible alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                {% endif %}
+                <h4><b>Informasjon</b></h4>
+                <p>Her kan du godkjenne eller avise brukere som har registrert seg på siden.</p>
+                <ul>
+                    <li><b>Avventende bruker</b> - <s>Kan logge inn</s>, reservert e-post, <s>er godkjent/avvist</s>, kan slettes</li>
+                    <li><b>Godkjent bruker</b> - Kan logge inn, reservert e-post, er godkjent/avvist, <s>kan slettes</s></li>
+                    <li><b>Avvist bruker</b> - <s>Kan logge inn</s>, reservert e-post, er godkjent/avvist, kan slettes</li>
+                    <li><b>Slettet bruker</b> - <s>Kan logge inn, reservert e-post, er godkjent/avvist, kan slettes</s> = aka. forsvunnet i eteren</li>
+                </ul>
+                <br>
+                <h4><b>Oops! Oops!</b></h4>
+                <p>
+                    Godkjente brukere kan verken <b>slettes</b>, <b>avvises</b> eller <b>tilbakeføres til avventende</b>.
+                    Dette er gjort for å unngå forvirring blant allerede aktiverte brukere.
+                    Dersom det likevel skulle være nødvendig å endre en aktiv bruker, vennligst ta kontakt med <a href="mailto:webkom@nabla.ntnu.no">Webkom</a>.
+                </p>
+                <hr>
+                <form name="form1" class="input-group hidden-xs">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <a href="{% url 'user.registerapplicants' %}" class="btn btn-primary">Avventende brukere</a>
+                            <a href="{% url 'user.registerapplicants' %}?list=accepted" class="btn btn-success">Godkjente brukere</a>
+                            <a href="{% url 'user.registerapplicants' %}?list=declined" class="btn btn-warning">Avslåtte brukere</a>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Søk etter bruker..." required="true">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span> Søk</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row hidden-sm hidden-md hidden-lg">
+                    <div class="col-xs-12">
+                        <a href="{% url 'user.registerapplicants' %}" class="btn btn-primary btn-block">Avventende brukere</a>
+                        <a href="{% url 'user.registerapplicants' %}?list=accepted" class="btn btn-success btn-block">Godkjente brukere</a>
+                        <a href="{% url 'user.registerapplicants' %}?list=declined" class="btn btn-warning btn-block">Avslåtte brukere</a>
+                        <br>
+                        <form name="form2">
+                            <div class="input-group btn-block">
+                                <input type="text" class="form-control" placeholder="Søk etter bruker..." required="true">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span> Søk</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <hr>
+                <h3>{{ user_title }}</h3>
+                <hr>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Fornavn</th>
+                                <th>Etternavn</th>
+                                <th>E-post</th>
+                                <th class="text-center">Årskull</th>
+                                <th class="text-center">Handling</th>
+                                <th class="text-center">Slett</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in user_list %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ user.first_name }}</td>
+                                <td>{{ user.last_name }}</td>
+                                <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+                                <td class="text-center">{{ user.starting_year }}</td>
+                                <td class="text-center">
+                                    {% if user.is_active %}
+                                        <span class="btn btn-primary disabled"><span class="glyphicon glyphicon-time"></span></span>
+                                        <span class="btn btn-warning disabled"><span class="glyphicon glyphicon-remove"></span></span>
+                                    {% elif not user.is_active and not user.is_awaiting_approval %}
+                                        <a href="{% url 'user.changeapplicants' action='undecided' userid=user.id %}" class="btn btn-primary"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a>
+                                        <a href="{% url 'user.changeapplicants' action='accept' userid=user.id %}" class="btn btn-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+                                    {% else %}
+                                        <a href="{% url 'user.changeapplicants' action='accept' userid=user.id %}" class="btn btn-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+                                        <a href="{% url 'user.changeapplicants' action='decline' userid=user.id %}" class="btn btn-warning"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    {% if not user.is_active %}
+                                        <a href="{% url 'user.changeapplicants' action='delete' userid=user.id %}" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                                    {% else %}
+                                        <span class="btn btn-danger disabled"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Ingen brukere...</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <ol class="breadcrumb">
+            <li><a href="{% url 'user.profile' %}">Min profil</a></li>
+            <li class="active">Registreringsforespørsler</li>
+        </ol>
+    </div>
+</div>
+{% endblock %}

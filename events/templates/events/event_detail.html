@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load django_markdown %}
+{% load easy_thumbnails %}
+
+{% block title %}{{ event.headline }}{% endblock %}
+
+{% block content %}
+
+{% if not event.hidden_to_guests or user.is_authenticated %}
+<div class="box">
+    {% if event.event_picture %}
+    <img alt="header" class="shadow img-responsive"
+         src="{% thumbnail event.event_picture 1000x400 box=event.event_cropping upscale=True detail=True quality=95 %}">
+    {% endif %}
+
+    <header><h2>{{ event.headline }}</h2></header>
+    <p><strong>{{ event.lead_paragraph}}</strong></p>
+    <div style="overflow: hidden;">{{ event.body|markdown}}</div>
+</div>
+{% endif %}
+
+
+{# Vis påmeldte #}
+{% if user.is_authenticated %}
+    {% if event.eventregistration_set.all %}
+        <h3>Påmeldte</h3>
+        <div class="registrations">
+            {% for registration in event.eventregistration_set.all %}
+            {% if not registration.waiting %}
+            {% with user=registration.user %}
+            <span class="label label-default" style="display: inline-block; color: white; background-color: #355c7d">
+                {% if user.get_full_name %}
+                    {{ user.get_full_name }}
+                {% else %}
+                    {{ user.username }}
+                {% endif %}
+            </span>
+            {% endwith %}
+            {% endif %}
+            {% endfor %}
+        </div>
+        <br>
+        {% if event.free_places == 0 %}
+            <h3>Venteliste</h3>
+        {% endif %}
+        <div class="registrations">
+            {% for registration in event.eventregistration_set.all %}
+            {% if registration.waiting %}
+            {% with user=registration.user %}
+            <span class="label label-default" style="display: inline-block; color: white; background-color: #6c5b7b">
+                {% if user.get_full_name %}
+                    {{ user.get_full_name }}
+                {% else %}
+                    {{ user.username }}
+                {% endif %}
+            </span>
+            {% endwith %}
+            {% endif %}
+            {% endfor %}
+        </div>
+   {% endif %}
+{% endif %}
+
+{% endblock %}
+
+
+{% block sidebar %}
+<br>
+{% include "events/includes/info.html" with event=event %}
+<br>
+{% include "content/includes/meta.html" with content=event %}
+{% include "events/includes/sidebar-admin.html" %}
+
+{% endblock %}

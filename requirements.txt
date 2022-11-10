@@ -1,0 +1,11 @@
+django==1.11.5
+django-markdown-app==0.9.3.1
+easy-thumbnails==2.5
+django-bootstrap3==9.1.0
+django-image-cropping==1.1.0
+django-sekizai==0.10.0
+django-braces==1.11.0
+gunicorn==19.7.1
+PyMySQL==0.7.11
+django-qr-code==0.3.3
+django-naomi==0.8
