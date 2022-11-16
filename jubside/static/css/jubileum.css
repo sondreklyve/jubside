@@ -142,6 +142,61 @@ nav div img {
 	}
 }
 
+
+/*----------------------------------------------------------------------------*\
+	Countdown
+\*----------------------------------------------------------------------------*/
+
+
+body {
+  font-family: LemonMilk;
+  padding: auto;
+  margin: auto;
+  text-align: center;
+  color: #EAA960;
+  background: var(--bg-color);
+}
+
+#jub {
+  text-align: center;
+  font-size: 5vh;
+}
+
+#clock {
+  margin: auto;
+  font-family:LemonMilk;
+  font-size: 10vh;
+}
+
+#clock td {
+  width: 320px;
+}
+
+#clock-text {
+  font-size: 2vh;
+  text-align: center;
+}
+
+@media only screen and (max-width: 1400px) {
+  #logo {
+    width: 80vw;
+    height: auto;
+  }
+
+  #jub {
+    font-size: 3.5vw;
+  }
+
+  #clock{
+    width: 90%;
+    font-size: 6vw;
+  }
+
+  #clock-text{
+    font-size: 1.5vw;
+  }
+}
+
 /*----------------------------------------------------------------------------*\
 	News bar
 \*----------------------------------------------------------------------------*/
@@ -208,9 +263,8 @@ main {
 	width: 100%;
 }
 
-@media (max-width: 1011px) {
-	main { width: 500px; }
-	.jub-content { grid-template-columns: repeat(2, 1fr);}
+@media (max-width: 800px) {
+	main { width: 650px; }
 }
 
 .jub-content article {
@@ -218,38 +272,56 @@ main {
 	position: relative;
 	margin: 40px;
 	padding: 20px;
-	background-color: #961D34;
+	background-color: #7E304E;
 	word-break: break-all;
 }
 
 @media (max-width: 502px) {
 	main { width: 98%; }
-	.jub-content { grid-template-columns: repeat(2, 1fr);}
-    .jub-content article { height: 50%;}
+	.jub-content article { width: 300px; }
+    .jub-content article .article-title { width: 100%!important; }
+    .jub-content article .article-thumbnail{ display: none; }
+    .jub-content article p{ width: 100%; }
+
+  #logo {
+      display: none;
+  }
+
+  #jub {
+      display: none;
+  }
+
+  #clock{
+      display: none;
+  }
+
+  #clock-text{
+      display: none;
+  }
 }
 
 .jub-content article .article-title {
-	position: absolute;
-	margin: 0;
-	top: 0;
+    float: left;
+	height: 100%;
 	width: 50%;
-	padding: 0.5em;
+	overflow: hidden;
 	font-size: 1.5em;
 }
 
 .jub-content article .article-thumbnail {
-    display: block;
-    margin-left: auto;
-    width: 40%;
+    float: right;
+    height: 100%;
+    width: auto;
     background-color: #0C273B;
 
 }
 .article-title h4 { text-transform: uppercase; margin: 0; }
 
 .jub-content article p {
-	display: none;
-	flex: 1;
-	margin: 1em;
+    float: left;
+	height: 100%;
+	width: 50%;
+	font-size: 1.5em;
 	overflow: hidden;
 }
 
