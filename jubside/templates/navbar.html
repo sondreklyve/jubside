@@ -12,7 +12,7 @@
 <nav id="jub-nav">
 	<div id="site-navigation" aria-label="Menu">
 	    <a href="{{ jubside_frontpage }}" class="col3">
-		    <img src="{% static "img/Logo-icon-jub75.png" %}" alt="75">
+		    <img src="{% static "img/Logo-icon-jub80.png" %}" alt="80">
 	    </a>
 
         <label for="toggle-mobile-menu" aria-label="Menu">&#9776;</label>
@@ -20,8 +20,8 @@
 
 		<ul id="main-menu">
 			<li style="text-align: center" {% if request.path == jubside_frontpage %}class="active"{% endif %}><a href="{{ jubside_frontpage }}" class="col3">Hjem</a></li>
-			<li style="text-align: center"><a href="{{ '/album/' }}" class="col5">Album</a></li>
 			<li style="text-align: center"><a href="{{ '/alumni/' }}" class="col4">Alumni</a></li>
+			<li style="text-align: center"><a href="{{ '/album/' }}" class="col5">Album</a></li>
 <!--
             <li style="text-align: center"><a href="#news" data-toggle="popover" title="Popover Header" data-content="Under utvikling" class="col1">Nyheter</a></li>
 			<li style="text-align: center"><a href="#alumni" class="col4">Alumni</a></li>
@@ -43,7 +43,7 @@
 				</ul>
 			  </li>
 			{% else %}
-			<li {% if request.path == user_login or request.path == user_registration or request.path == user_reset %}class="active"{% endif %}><a href="{{ user_login }}" class="col5">Logg inn / Registrer deg</a></li>
+			<li {% if request.path == user_login or request.path == user_registration or request.path == user_reset %}class="active"{% endif %}><a href="{{ user_login }}" class="col4">Logg inn / Registrer deg</a></li>
 			{% endif %}
 		</ul>
 	</div>

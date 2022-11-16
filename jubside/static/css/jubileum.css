@@ -1,12 +1,16 @@
 /*----------------------------------------------------------------------------*\
 	Reset defaults
 \*----------------------------------------------------------------------------*/
+@font-face {
+  font-family: LemonMilk;
+  src: url('LEMONMILK-Bold.otf');
+}
 
-html { background-color: #fafafa; font-family: sans-serif; }
+html { background-color: #fafafa; font-family: LemonMilk, sans-serif; }
 body {
-	/*background-image: url(HEDDA.png);
-	background-size: cover;*/
 	background-color: var(--bg-color);
+	color: #FFFFFF;
+	font-family: LemonMilk, sans-serif; 
 	margin: 0;
 	min-height: 100vh;
 	display: flex;
@@ -15,7 +19,7 @@ body {
 }
 address { font-style: normal; }
 a, a:visited { text-decoration: none; }
-
+h4 { font-family: LemonMilk, sans-serif; }
 /* OVERRIDE BOOTSTRAP */
 body { padding-top: 0; }
 @media only screen and (min-width: 768px) {
@@ -28,13 +32,13 @@ body { padding-top: 0; }
 	Theme colors
 \*----------------------------------------------------------------------------*/
 
-:root { --bg-color: #eee; --bar-color: #e8e8e8; }
+:root { --bg-color: #0C273B; --bar-color: #7E304E; }
 
-.col1 { color: #f8b195; }
-.col2 { color: #f67280; }
-.col3 { color: #c06c84; }
-.col4 { color: #6c5b7b; }
-.col5 { color: #355c7d; }
+.col1 { color: #961D34; }
+.col2 { color: #7E304E; }
+.col3 { color: #FFFFFF; }
+.col4 { color: #EAA960; }
+.col5 { color: #0C273B; }
 
 /*----------------------------------------------------------------------------*\
 	Navigation bar (w/ mobile support)
@@ -94,7 +98,7 @@ nav div img {
 }
 
 #site-navigation a:hover, #site-navigation #user-block:hover {
-	color: #333;
+	color: #961D34;
 	/*text-decoration: underline dashed gold;*/
 }
 #site-navigation #user-block:hover { cursor: pointer; }
@@ -196,13 +200,12 @@ main {
 	margin: auto;
 	padding-bottom: 2em;
 	padding-top: 2em;
-	width: 1000px;
+	width: 800px;
 }
 
 .jub-content {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	grid-gap: 0.2em;
+	display: inline-block;
+	width: 100%;
 }
 
 @media (max-width: 1011px) {
@@ -211,9 +214,11 @@ main {
 }
 
 .jub-content article {
-	height: 250px;
+	height: 290px;
 	position: relative;
-	background-color: #333;
+	margin: 40px;
+	padding: 20px;
+	background-color: #961D34;
 	word-break: break-all;
 }
 
@@ -227,11 +232,18 @@ main {
 	position: absolute;
 	margin: 0;
 	top: 0;
-	background-color: rgba(0, 0, 0, 0.7);
+	width: 50%;
 	padding: 0.5em;
 	font-size: 1.5em;
 }
 
+.jub-content article .article-thumbnail {
+    display: block;
+    margin-left: auto;
+    width: 40%;
+    background-color: #0C273B;
+
+}
 .article-title h4 { text-transform: uppercase; margin: 0; }
 
 .jub-content article p {
@@ -301,7 +313,7 @@ h3, #socmed-links ul { margin: 0; padding: 0; }
 #socmed-links li:last-child:after { content: ""; }
 
 #socmed-links a { text-decoration: underline; }
-#socmed-links a:hover { color: #333; }
+#socmed-links a:hover { color: #961D34; }
 
 /*---------
     General

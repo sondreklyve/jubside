@@ -1,0 +1,70 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+:root {
+  --white: #ffffff;
+  --black: #000000;
+}
+
+@font-face {
+    font-family: LemonMilk;
+    src: url(LEMONMILK-Bold.otf);
+}
+
+body {
+  font-family: LemonMilk;
+  padding: auto;
+  margin: auto;
+  text-align: center;
+  color: var(--white);
+  background: var(--black);
+}
+
+#logo {651235
+  margin-top: 2vh;
+  height: 38vh;
+}
+
+#jub {
+  text-align: center;
+  font-size: 5vh;
+}
+
+#clock {
+  margin: auto;
+  font-family:LemonMilk;
+  font-size: 20vh;
+}
+
+#clock td {
+  width: 320px;
+}
+
+#clock-text {
+  font-size: 5vh;
+  text-align: center;
+}
+
+@media only screen and (max-width: 1400px) {
+  #logo {
+    width: 80vw;
+    height: auto;
+  }
+
+  #jub {
+    font-size: 7vw;
+  }
+
+  #clock{
+    width: 90%;
+    font-size: 10vw;
+  }
+
+  #clock-text{
+    font-size: 3vw;
+  }
+}
