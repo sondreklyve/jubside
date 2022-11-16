@@ -302,6 +302,7 @@ main {
 
 .jub-content article .article-title {
     float: left;
+    text-align: left;
 	height: 100%;
 	width: 50%;
 	overflow: hidden;
