@@ -2,8 +2,6 @@
 {% load easy_thumbnails %}
 {% load static %}
 {% block head %}
-    <link rel="stylesheet" href={% static "countdown/css/googlefont.css" %} />
-    <link rel="stylesheet" href={% static "countdown/countdown/jquery.countdown.css" %} />
     <link rel="stylesheet" href={% static "css/fireworks.css" %} />
 {% endblock %}
 {% block content %}
@@ -23,11 +21,15 @@
 	            {% if event.front_picture %}
 	            <img class="article-thumbnail" alt="header" src="{% thumbnail event.front_picture 250x250 box=event.front_cropping upscale=False detail=True quality=95 %}">
 	            {% endif %}
-	            <div class="article-title text-block">
-	                <h4 class="col3">{{ event.headline }}</h4>
-	                <h4 class="col4">{{ event.event_start|date:"j. N"}}</h4>
+		    <div class="article-block">
+	              <div class="article-title">
+	                <h3 class="col3">{{ event.headline }}</h3>
+	                <h3 class="col4">{{ event.event_start|date:"j. N"}}</h3>
+		      </div>
+		      <div class="article-paragraph">
 	                <h4 class="col5">{{ event.lead_paragraph }}</h4>
-	            </div>
+		      </div>
+		    </div>
 	        </article>
 	        </a>
 	    {% endif %}

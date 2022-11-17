@@ -1,0 +1,79 @@
+@font-face {
+    font-family: LemonMilk;
+    src: url('fonts/LEMONMILK-Bold.otf');
+}
+
+@font-face {
+    font-family: RobotoBold;
+    src: url('fonts/Roboto-Bold.ttf');
+}
+
+/*----------------------------------------------------------------------------*\
+	Events
+\*----------------------------------------------------------------------------*/
+
+.event-header {
+    background-color: #000000;
+    position: relative;
+    width: 800px;
+    height: 300px;
+}
+
+main, .event-header { padding-top: 0; }
+nav > div, .event-header { border-bottom: 0; }
+
+.event-header img {
+    height: 300px;
+}
+
+.event-header h1 {
+    font-family: LemonMilk;
+    position: absolute;
+    font-size: 3em;
+    bottom: 8px;
+    left: 16px;
+}
+
+.event-info {
+    background-color: #7E304E;
+    padding: 16px;
+    float: left;
+}
+
+.event-info h2 {
+    text-align: left;
+    width: 100%;
+    font-family: LemonMilk;
+    font-size: 2em;
+    margin-top: 0;
+}
+
+.event-info .event-paragraph {
+    font-family: RobotoBold;
+    font-size: 1.5em;
+    color: #0C273B;
+    text-align: left;
+    float: left;
+    width: 45%;
+}
+
+.event-info .event-data {
+    text-align: left;
+    background-color: #0C273B;
+    float: right;
+    width: 50%;
+}
+
+@media (max-width: 800px) {
+}
+
+@media (max-width: 502px) {
+    main { width: 98%; }
+    .jub-content article { width: 300px; }
+    .jub-content article .article-block { width: 100%!important; }
+    .jub-content article .article-thumbnail{ display: none; }
+    #logo { display: none; }
+    #jub { display: none; }
+    #clock{ display: none; }
+    #clock-text{ display: none; }
+}
