@@ -22,13 +22,17 @@
 </div>
 <div class="event-info">
     <h2>{{ event.event_start|date:"d. M" }} kl. {{ event.event_start|date:"H:i" }} | {{ event.location }} </h2>
-    <div class="event-paragraph">
+    <div class="event-paragraph" {% if not event.registration_required %} style="width: 100%" {% endif %}>
         <p>{{ event.lead_paragraph}}</p>
         <p>{{ event.body|markdown}}</p>
     </div>
+
+    {% if event.registration_required %}
     <div class="event-data">
-        <p>Påmeldingsfrist ... </p>
+        {% include "events/includes/info.html" with event=event %}
     </div> 
+    {% endif %}
+        
 </div>
 {% endif %}
 

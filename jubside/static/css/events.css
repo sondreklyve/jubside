@@ -46,6 +46,7 @@ nav > div, .event-header { border-bottom: 0; }
     font-family: LemonMilk;
     font-size: 2em;
     margin-top: 0;
+    margin-bottom: 20px;
 }
 
 .event-info .event-paragraph {
@@ -62,6 +63,25 @@ nav > div, .event-header { border-bottom: 0; }
     background-color: #0C273B;
     float: right;
     width: 50%;
+    padding: 10px;
+}
+
+.btn { border-radius: 0!important; border: 0; }
+
+.attending {
+    font-family: RobotoBold;
+    font-size: 1.5em;
+    text-align: center;
+    padding: 4px;
+}
+
+.progress {
+    height: 20px;
+    border-radius: 0;
+}
+
+.progress-bar {
+    background-color: #EAA960;
 }
 
 @media (max-width: 800px) {
