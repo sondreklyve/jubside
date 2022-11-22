@@ -1,6 +1,6 @@
 # Jubside #
 
-Velkommen til siden for Nabla-jubileumet 2018!
+Velkommen til siden for Nabla-jubileumet 2022!
 
 All python-kode, html, css, javascript og andre statiske filer som har med (ikke enda opprettede) jubileum.nabla.no skal ligge her.
 
@@ -16,7 +16,7 @@ Backenddelen av nettsiden er skrevet i [django](http://djangoproject.org).
 - events -- django-appen for arrangement
 - album -- django-app som gir oss album...
 
-## Kjøre siden ##
+## KjÃ¸re siden ##
 * Klone repoet
 * Sett opp et virtual environment
 * pip install -r requirements.txt
